@@ -15,6 +15,16 @@ def get_all_tree_item_ids(tree_widget, parent=''):
         pass
     return ids
 
+def expand_all_tree_nodes(tree_widget):
+    """Expands all nodes in the tree widget."""
+    if tree_widget:
+        all_ids = get_all_tree_item_ids(tree_widget)
+        for item_id in all_ids:
+            try:
+                tree_widget.item(item_id, open=True)
+            except Exception:
+                pass
+
 def create_main_window():
     """Creates the main window layout."""
 
@@ -28,7 +38,7 @@ def create_main_window():
 
     right_column = [
         [sg.Text("JSON Tree View:")],
-        [sg.Tree(data=sg.TreeData(), headings=['Value'], key='-TREE-', show_expanded=False, col0_width=30, auto_size_columns=False, num_rows=20, expand_x=True, expand_y=True)],
+        [sg.Tree(data=sg.TreeData(), headings=['Value'], key='-TREE-', show_expanded=False, col0_width=30, auto_size_columns=False, num_rows=20, expand_x=True, expand_y=True, enable_events=True, right_click_menu=['&Right', ['Copy JSONPath']])],
         [sg.Text("JSONPath Filter:"), sg.InputText(key="-JSONPATH_FILTER-", enable_events=True, expand_x=True), sg.Button("?", key="-JSONPATH_HELP-", size=(2,1)), sg.Button("Apply Filter", key="-APPLY_FILTER-")], # Added Help button
         [sg.Button("Expand All", key="-EXPAND_ALL-"), sg.Button("Collapse All", key="-COLLAPSE_ALL-")], # Added Expand/Collapse buttons
         [sg.Text("Status:", key="-STATUS_RIGHT-")]
@@ -41,7 +51,7 @@ def create_main_window():
             sg.Column(right_column, element_justification='left', expand_x=True, expand_y=True),
         ]
     ]
-    return sg.Window("PySimpleJSONViewer", layout, resizable=True, finalize=True, size=(1200, 800), element_justification='left', margins=(10, 10), keep_on_top=False)
+    return sg.Window("freesimplejsonviewer", layout, resizable=True, finalize=True, size=(1200, 800), element_justification='left', margins=(10, 10), keep_on_top=False)
 
 # Removed load_json_or_jsonl function as it's no longer used
 
@@ -64,6 +74,8 @@ def update_tree(tree_element, json_data):
     if json_data:
         add_nodes('', json_data)
     tree_element.update(values=treedata)
+    # Expand all nodes after updating the tree
+    expand_all_tree_nodes(tree_element.Widget)
 
 def main():
     window = create_main_window()
@@ -178,6 +190,27 @@ Notes:
                 window["-STATUS_RIGHT-"].update("Tree collapsed.")
             else:
                 window["-STATUS_RIGHT-"].update("Tree widget not available.")
+
+        elif event == "Copy JSONPath":
+            # Get the selected item from the tree
+            try:
+                selected_items = window['-TREE-'].SelectedRows
+                if selected_items:
+                    # Get the key (node_key) of the selected item
+                    selected_key = selected_items[0]
+                    # Convert the key to JSONPath Extended Syntax
+                    # The key is already in a format like "key1.key2[0].key3"
+                    # Convert to JSONPath format: "$.key1.key2[0].key3"
+                    jsonpath = "$." + selected_key if selected_key and not selected_key.startswith('[') else "$" + selected_key
+                    
+                    # Copy to clipboard
+                    sg.clipboard_set(jsonpath)
+                    window["-STATUS_RIGHT-"].update(f"JSONPath copied: {jsonpath}")
+                    sg.popup_quick_message(f"Copied to clipboard:\n{jsonpath}", auto_close_duration=2, background_color='green', text_color='white')
+                else:
+                    window["-STATUS_RIGHT-"].update("No item selected.")
+            except Exception as e:
+                window["-STATUS_RIGHT-"].update(f"Error copying JSONPath: {e}")
 
 
         elif event == "-APPLY_FILTER-" and current_json_data:

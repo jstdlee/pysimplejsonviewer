@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# filepath: d:\py\pysimplejson\pysimplejsonviewer\__main__.py
+# filepath: d:\py\pysimplejson\freesimplejsonviewer\__main__.py
 
 from .main import main
 

@@ -10,7 +10,7 @@ dependencies = [
 ]
 
 [project.scripts]
-pysimplejsonviewer = "pysimplejsonviewer.__main__:main"
+freesimplejsonviewer = "freesimplejsonviewer.__main__:main"
 
 [project.gui-scripts]
-pysimplejsonviewer-gui = "pysimplejsonviewer.__main__:main"
+freesimplejsonviewer-gui = "freesimplejsonviewer.__main__:main"
