@@ -1,6 +1,6 @@
 [project]
 name = "pysimplejson"
-version = "0.1.2"
+version = "0.1.3"
 description = "A user-friendly tool to view, analyze, and interact with JSON and JSONL data."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -10,7 +10,7 @@ dependencies = [
 ]
 
 [project.scripts]
-freesimplejsonviewer = "freesimplejsonviewer.__main__:main"
+freesimplejson = "freesimplejson.__main__:main"
 
 [project.gui-scripts]
-freesimplejsonviewer-gui = "freesimplejsonviewer.__main__:main"
+freesimplejson-gui = "freesimplejson.__main__:main"

@@ -1,5 +1,5 @@
 <!-- filepath: d:\py\pysimplejson\README.md -->
-# freesimplejsonviewer 🚀
+# freesimplejson 🚀
 
 [![PyPI version](https://img.shields.io/pypi/v/pysimplejson.svg)](https://pypi.org/project/pysimplejson/)
 [![Build Status](https://img.shields.io/travis/com/yourusername/pysimplejson.svg)](https://travis-ci.com/yourusername/pysimplejson)
@@ -8,7 +8,7 @@
 
 **A user-friendly tool to view, analyze, and interact with JSON and JSONL data.**
 
-freesimplejsonviewer provides an intuitive graphical interface built with FreeSimpleGUI to make JSON exploration seamless. It features a side-by-side view for raw JSON input and a structured tree display, along with powerful filtering capabilities using JSONPath.
+freesimplejson provides an intuitive graphical interface built with FreeSimpleGUI to make JSON exploration seamless. It features a side-by-side view for raw JSON input and a structured tree display, along with powerful filtering capabilities using JSONPath.
 
 ## ✨ Key Features
 
@@ -41,7 +41,7 @@ freesimplejsonviewer provides an intuitive graphical interface built with FreeSi
 
 1.  **Clone the repository (or download the source):**
     ```bash
-    git clone https://github.com/jstdlee/freesimplejsonviewer.git
+    git clone https://github.com/jstdlee/freesimplejson.git
     cd pysimplejson
     ```
 2.  **Ensure you have Python 3.12+ installed.**
@@ -62,10 +62,10 @@ freesimplejsonviewer provides an intuitive graphical interface built with FreeSi
 
 ## 🚀 Usage
 
-To run the freesimplejsonviewer application:
+To run the freesimplejson application:
 
 ```bash
-python freesimplejsonviewer/main.py
+python freesimplejson/main.py
 ```
 
 Once the application starts:

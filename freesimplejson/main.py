@@ -51,7 +51,7 @@ def create_main_window():
             sg.Column(right_column, element_justification='left', expand_x=True, expand_y=True),
         ]
     ]
-    return sg.Window("freesimplejsonviewer", layout, resizable=True, finalize=True, size=(1200, 800), element_justification='left', margins=(10, 10), keep_on_top=False)
+    return sg.Window("freesimplejson", layout, resizable=True, finalize=True, size=(1200, 800), element_justification='left', margins=(10, 10), keep_on_top=False)
 
 # Removed load_json_or_jsonl function as it's no longer used
 
